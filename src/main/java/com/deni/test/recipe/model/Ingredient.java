@@ -6,16 +6,17 @@ import java.math.BigDecimal;
 @Entity
 public class Ingredient {
     @Id
-    Long id;
-    String description;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String description;
 
-    BigDecimal amount;
+    private BigDecimal amount;
     @ManyToOne
     @JoinColumn(name = "id")
-    Recipe recipe;
+    private Recipe recipe;
 
-    @OneToOne
-    UnitOfMeasure unitOfMeasure;
+    @OneToOne(fetch = FetchType.EAGER)
+    private UnitOfMeasure unitOfMeasure;
 
     public Long getId() {
         return id;
