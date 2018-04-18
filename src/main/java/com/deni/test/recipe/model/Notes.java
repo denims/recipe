@@ -8,6 +8,7 @@ public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Lob
     private String recipeNote;
     @OneToOne
     private Recipe recipe;
