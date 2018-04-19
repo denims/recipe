@@ -1,0 +1,21 @@
+body{
+    background-image: url("https://images.unsplash.com/photo-1508709145194-8fec9fa2102b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f0651db87a489e855e6d70a687b77722&auto=format&fit=crop&w=1363&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /*font-family: 'Roboto', sans-serif;*/
+    /*color: white;*/
+/*}*/
+html{
+    height: 100%;
+}
+hr{
+    /*color : #ffffff;*/
+    border-top: 1px solid #ffffff;
+    color: #ffffff;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.whitefont{
+    font-family: 'Roboto', sans-serif;
+}
