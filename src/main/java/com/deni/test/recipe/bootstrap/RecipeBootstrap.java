@@ -4,6 +4,7 @@ import com.deni.test.recipe.model.*;
 import com.deni.test.recipe.repositories.CategoryRepository;
 import com.deni.test.recipe.repositories.RecipeRepository;
 import com.deni.test.recipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -29,12 +31,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.debug("Saving all recipes");
         recipeRepository.saveAll(getRecipes());
 
     }
 
     private List<Recipe> getRecipes() {
-
+        log.debug("Called getRecipes");
         List<Recipe> recipes = new ArrayList<>(2);
 
         //get UOMs
@@ -137,8 +140,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom));
         guacRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
-        guacRecipe.getCategories().add(americanCategory);
-        guacRecipe.getCategories().add(mexicanCategory);
+        guacRecipe.addCategories(americanCategory);
+        guacRecipe.addCategories(mexicanCategory);
 
         //add to return list
         recipes.add(guacRecipe);
@@ -196,8 +199,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cupsUom));
         tacosRecipe.addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom));
 
-        tacosRecipe.getCategories().add(americanCategory);
-        tacosRecipe.getCategories().add(mexicanCategory);
+        tacosRecipe.addCategories(americanCategory);
+        tacosRecipe.addCategories(mexicanCategory);
 
         recipes.add(tacosRecipe);
         return recipes;
