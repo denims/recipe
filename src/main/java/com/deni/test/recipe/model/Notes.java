@@ -18,4 +18,8 @@ public class Notes {
     @OneToOne
     private Recipe recipe;
 
+    @Override
+    public String toString() {
+        return recipeNote;
+    }
 }
