@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class RecipeServiceImplTest {
@@ -23,8 +25,6 @@ public class RecipeServiceImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository);
-
-
     }
 
     @Test
@@ -33,7 +33,11 @@ public class RecipeServiceImplTest {
         recipes.add(new Recipe());
         recipes.add(new Recipe());
         when(recipeRepository.findAll()).thenReturn(recipes);
-        assertEquals(1,recipeService.getRecipes().size());
-
+        assertEquals(2,recipeService.getRecipes().size());
+    }
+    @Test
+    public void testIfFindAllIsCalledOnlyOnce(){
+        recipeService.getRecipes();
+        verify(recipeRepository,times(1)).findAll();
     }
 }
