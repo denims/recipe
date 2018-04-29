@@ -12,7 +12,7 @@ public class RecipeApplicationIT {
 
     @Before
     public void setUp() throws Exception {
-        
+
     }
 
     @Test
