@@ -1,12 +1,7 @@
 package com.deni.test.recipe.model;
 
-import lombok.*;
-
 import javax.persistence.*;
-import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
 public class Notes {
 
@@ -21,5 +16,29 @@ public class Notes {
     @Override
     public String toString() {
         return recipeNote;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getRecipeNote() {
+        return this.recipeNote;
+    }
+
+    public Recipe getRecipe() {
+        return this.recipe;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRecipeNote(String recipeNote) {
+        this.recipeNote = recipeNote;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

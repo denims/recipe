@@ -1,12 +1,9 @@
 package com.deni.test.recipe.model;
 
-import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Data
-@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
     @Id
@@ -27,4 +24,47 @@ public class Ingredient {
         this.unitOfMeasure = unitOfMeasure;
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public BigDecimal getAmount() {
+        return this.amount;
+    }
+
+    public Recipe getRecipe() {
+        return this.recipe;
+    }
+
+    public UnitOfMeasure getUnitOfMeasure() {
+        return this.unitOfMeasure;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public java.lang.String toString() {
+        return "Ingredient(id=" + this.id + ", description=" + this.description + ", amount=" + this.amount + ", recipe=" + this.recipe + ", unitOfMeasure=" + this.unitOfMeasure + ")";
+    }
 }
