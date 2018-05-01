@@ -26,4 +26,9 @@ public class RecipeServiceImpl implements RecipeService {
         }
         return recipes;
     }
+
+    @Override
+    public Recipe getRecipe(Long id) {
+        return recipeRepository.findById(id).get();
+    }
 }
