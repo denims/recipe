@@ -24,7 +24,8 @@
                         <tr>
                             <td th:text="${recipe.getId()}">1</td>
                             <td th:text="${recipe.getDescription()}">Description</td>
-                            <td><a th:href="@{http://localhost:8080/recipe(id=${recipe.getId()})}">View</a></td>
+                            <!--<td><a th:href="@{/recipe(id=${recipe.getId()})}">View</a></td>-->
+                            <td><a th:href="@{/recipe/show/{recipeid}(recipeid=${recipe.getId()})}">View</a></td>
                         </tr>
                         </tbody>
                     </table>
