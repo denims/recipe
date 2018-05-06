@@ -1,5 +1,6 @@
 package com.deni.test.recipe.controllers;
 
+import com.deni.test.recipe.model.Recipe;
 import com.deni.test.recipe.repositories.RecipeRepository;
 import com.deni.test.recipe.services.RecipeService;
 import com.sun.xml.bind.v2.schemagen.xmlschema.Any;
@@ -14,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,9 +26,6 @@ public class RecipeControllerTest {
     RecipeController recipeController;
     @Mock
     RecipeService recipeService;
-
-    @Mock
-    Model model;
 
     @Before
     public void setUp() throws Exception {
@@ -45,6 +44,9 @@ public class RecipeControllerTest {
 
     @Test
     public void testIfCorrectViewAndModelIsReturned() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        when(recipeService.getRecipe(1L)).thenReturn(recipe);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
         mockMvc.perform(get("/recipe/show/1")).andExpect(view().name("recipe/show")).
                 andExpect(status().isOk()).andExpect(model().attributeExists("recipe"));
