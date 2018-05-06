@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -46,6 +47,6 @@ public class RecipeControllerTest {
     public void testIfCorrectViewAndModelIsReturned() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
         mockMvc.perform(get("/recipe/show/1")).andExpect(view().name("recipe/show")).
-                andExpect(status().isOk());
+                andExpect(status().isOk()).andExpect(model().attributeExists("recipe"));
     }
 }
