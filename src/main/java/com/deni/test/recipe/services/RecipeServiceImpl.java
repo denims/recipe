@@ -1,9 +1,15 @@
 package com.deni.test.recipe.services;
 
+import com.deni.test.recipe.commands.RecipeCommand;
+import com.deni.test.recipe.converters.RecipeCommandToRecipe;
+import com.deni.test.recipe.converters.RecipeToRecipeCommand;
 import com.deni.test.recipe.model.Recipe;
 import com.deni.test.recipe.repositories.RecipeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +17,16 @@ import java.util.Optional;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RecipeServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(RecipeServiceImpl.class);
     private RecipeRepository recipeRepository;
+    private RecipeToRecipeCommand recipeToRecipeCommand;
+    private RecipeCommandToRecipe recipeCommandToRecipe;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommand recipeToRecipeCommand,
+                             RecipeCommandToRecipe recipeCommandToRecipe) {
         this.recipeRepository = recipeRepository;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
     }
 
     @Override
@@ -34,5 +45,13 @@ public class RecipeServiceImpl implements RecipeService {
         if(!recipe.isPresent())
             throw new RuntimeException("No recipes present");
         return recipe.get();
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+        Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        return recipeToRecipeCommand.convert(savedRecipe);
     }
 }

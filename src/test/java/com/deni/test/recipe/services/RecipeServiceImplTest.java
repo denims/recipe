@@ -1,5 +1,7 @@
 package com.deni.test.recipe.services;
 
+import com.deni.test.recipe.converters.RecipeCommandToRecipe;
+import com.deni.test.recipe.converters.RecipeToRecipeCommand;
 import com.deni.test.recipe.model.Recipe;
 import com.deni.test.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -20,11 +22,15 @@ public class RecipeServiceImplTest {
     RecipeServiceImpl recipeService;
     @Mock
     RecipeRepository recipeRepository;
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeToRecipeCommand,recipeCommandToRecipe);
     }
 
     @Test

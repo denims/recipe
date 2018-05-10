@@ -23,24 +23,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class RecipeControllerTest {
 
-    RecipeController recipeController;
+    private RecipeController recipeController;
     @Mock
-    RecipeService recipeService;
+    private RecipeService recipeService;
+    @Mock
+    private Model model;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         recipeController = new RecipeController(recipeService);
     }
-//    @Test
-//    public void testIfGetRecipeIsCalledOnlyOnce(){
-//        recipeController.getRecipe(model,ArgumentMatchers.anyLong());
-//        Mockito.verify(recipeService,Mockito.times(1)).getRecipe(ArgumentMatchers.anyLong());
-//    }
-//    @Test
-//    public void testIfRecipeIsreturned(){
-//        assertEquals("recipe",recipeController.getRecipe(model,ArgumentMatchers.anyLong()));
-//    }
+    @Test
+    public void testIfGetRecipeIsCalledOnlyOnce(){
+        recipeController.getRecipe(model,ArgumentMatchers.anyLong());
+        Mockito.verify(recipeService,Mockito.times(1)).getRecipe(ArgumentMatchers.anyLong());
+    }
+    @Test
+    public void testIfRecipeIsreturned(){
+        assertEquals("recipe/show",recipeController.getRecipe(model,ArgumentMatchers.anyLong()));
+    }
 
     @Test
     public void testIfCorrectViewAndModelIsReturned() throws Exception {

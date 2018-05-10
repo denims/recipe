@@ -1,15 +1,6 @@
-package com.deni.test.recipe.model;
+package com.deni.test.recipe.commands;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class UnitOfMeasure {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UnitOfMeasureCommand {
     private Long id;
     private String uom;
 
