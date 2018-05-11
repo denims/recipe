@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="icon" href="https://image.flaticon.com/icons/png/128/33/33592.png">
+</head>
+<body>
+    <div class="container">
+        <form th:action="@{/recipe}" method="post" th:object="${recipe}">
+            <div class="form-group">
+                <label for="recipeDescription">Recipe description</label>
+                <input  type="text" class="form-control" id="recipeDescription"
+                       placeholder="Enter description" th:field="*{description}">
+                <label for="prepTime">Prep time</label>
+                <input type="text" class="form-control w-25" id="prepTime"
+                       placeholder="Enter prep time" th:field="*{prepTime}">
+                <label for="cookTime">Cook time</label>
+                <input type="text" class="form-control w-25" id="cookTime"
+                       placeholder="Enter cook time" th:field="*{cookTime}">
+                <label for="servings">Servings</label>
+                <input type="text" class="form-control w-25" id="servings"
+                       placeholder="Enter servings" th:field="*{servings}">
+                <label for="source">Source</label>
+                <input type="text" class="form-control w-25" id="source"
+                       placeholder="Enter source" th:field="*{source}">
+                <label for="url">Url</label>
+                <input type="text" class="form-control w-25" id="url"
+                       placeholder="Enter URL" th:field="*{url}">
+            </div>
+            <div class="form-group">
+                <label for="directions">Directions</label>
+                <textarea class="form-control" id="directions" rows="3" th:field="*{directions}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" id="notes" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
