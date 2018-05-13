@@ -18,6 +18,8 @@
                             <th scope="col">ID</th>
                             <th scope="col">Description</th>
                             <th scope="col">View</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Delete</th>
                         </tr>
                         </thead>
                         <tbody th:each="recipe:${recipes}">
@@ -25,7 +27,9 @@
                             <td th:text="${recipe.getId()}">1</td>
                             <td th:text="${recipe.getDescription()}">Description</td>
                             <!--<td><a th:href="@{/recipe(id=${recipe.getId()})}">View</a></td>-->
-                            <td><a th:href="@{/recipe/show/{recipeid}(recipeid=${recipe.getId()})}">View</a></td>
+                            <td><a th:href="@{/recipe/{recipeid}/show(recipeid=${recipe.getId()})}">View</a></td>
+                            <td><a th:href="@{/recipe/{recipeid}/update(recipeid=${recipe.getId()})}">Update</a></td>
+                            <td><a th:href="@{/recipe/{recipeid}/delete(recipeid=${recipe.getId()})}">Delete</a></td>
                         </tr>
                         </tbody>
                     </table>

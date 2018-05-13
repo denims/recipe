@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -47,6 +49,7 @@ public class RecipeServiceIT {
         assertEquals(Recipe.class,recipe.getClass());
     }
     @Test
+    @Transactional
     public void testIfRecipeIsSaved(){
         Recipe recipe = new Recipe();
         String description = "Test";
@@ -55,5 +58,16 @@ public class RecipeServiceIT {
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(recipeToRecipeCommand.convert(recipe));
 
         assertEquals(description,savedRecipeCommand.getDescription());
+    }
+    @Test(expected = RuntimeException.class)
+    @Transactional
+    public void testIfRecipeIsDeleted(){
+        //test method. May not be required in real scenarios
+        Recipe recipe = recipeService.getRecipe(1L);
+
+        assertNotNull(recipe);
+        recipeService.deleteRecipe(1L);
+
+        recipe=recipeService.getRecipe(1L);
     }
 }
