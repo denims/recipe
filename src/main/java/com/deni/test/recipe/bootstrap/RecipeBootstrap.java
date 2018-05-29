@@ -202,6 +202,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.addCategories(mexicanCategory);
 
         recipes.add(tacosRecipe);
+        log.debug("Deni2 - Added all ingredients");
+        log.debug("Deni2 " + tacosRecipe.getIngredients().size());
         return recipes;
     }
 }

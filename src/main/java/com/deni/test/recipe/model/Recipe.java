@@ -1,11 +1,17 @@
 package com.deni.test.recipe.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Entity
 public class Recipe {
+    @Transient
+    Logger logger = LoggerFactory.getLogger(Recipe.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +29,7 @@ public class Recipe {
     private Byte[] image;
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "recipe_category",joinColumns = @JoinColumn(name = "recipe_id"),
@@ -41,6 +47,7 @@ public class Recipe {
 
     public void addIngredient(Ingredient ingredient){
         this.ingredients.add(ingredient);
+        ingredient.setRecipe(this);
     }
 
     public void addCategories(Category category){
@@ -92,6 +99,8 @@ public class Recipe {
     }
 
     public Set<Ingredient> getIngredients() {
+        logger.debug("Deni2 return ingredient");
+        logger.debug("Deni2 size of ingredient" + this.ingredients.size());
         return this.ingredients;
     }
 

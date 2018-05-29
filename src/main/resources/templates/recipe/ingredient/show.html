@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${recipe.getDescription()}">Recipe</title>
+    <title th:text="${ingredient.description}">Recipe</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
@@ -17,24 +17,15 @@
     </nav>
     <br>
     <div class="whitefont">
-        <h3 th:text="${recipe.description}">Description</h3>
+        <h3 th:text="${ingredient.description}">Description</h3>
         <p>
             <!--Prep time <span th:text="${recipe.getPrepTime()}"</span>-->
-            Prep time : <span th:text="${recipe.prepTime}">prep time</span>
+            Description : <span th:text="${ingredient.description}">prep time</span>
             <br>
-            Cook time : <span th:text="${recipe.cookTime}">cook time</span>
+            Amount : <span th:text="${ingredient.amount}">cook time</span>
             <br>
-            Difficulty : <span th:text="${recipe.difficulty}">cook time</span>
+            UOM : <span th:text="${ingredient.unitOfMeasureCommand.uom}">cook time</span>
         </p>
-        <h4>Ingredients(<a href="ingredients/">Edit</a>)</h4>
-        <ul>
-            <li th:each="ingredient1:${recipe.ingredients}" th:text="${ingredient1.description}">Ingredient</li>
-        </ul>
-        <h4>Directions</h4>
-        <p th:text="${recipe.directions}">Directions</p>
-        <h4>Notes</h4>
-        <p th:text="${recipe.notes}">Notes</p>
-        <hr>
     </div>
 
 </div>

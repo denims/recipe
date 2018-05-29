@@ -1,11 +1,16 @@
 package com.deni.test.recipe.model;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 public class Ingredient {
+    @Transient
+    Logger logger = LoggerFactory.getLogger(Ingredient.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,6 +37,8 @@ public class Ingredient {
     }
 
     public String getDescription() {
+        logger.debug("Deni2 Getting description");
+        logger.debug("Deni2"+this.description);
         return this.description;
     }
 
@@ -67,7 +74,4 @@ public class Ingredient {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public java.lang.String toString() {
-        return "Ingredient(id=" + this.id + ", description=" + this.description + ", amount=" + this.amount + ", recipe=" + this.recipe + ", unitOfMeasure=" + this.unitOfMeasure + ")";
-    }
 }
