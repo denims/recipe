@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RecipeController {
 
-    RecipeService recipeService;
+    public static final String RECIPE = "recipe";
+    private RecipeService recipeService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -17,20 +18,20 @@ public class RecipeController {
 
     @GetMapping("/recipe/{id}/show")
     public String getRecipe(Model model, @PathVariable Long id){
-        model.addAttribute("recipe",recipeService.getRecipe(id));
+        model.addAttribute(RECIPE,recipeService.getRecipe(id));
         return "recipe/show";
     }
     @GetMapping("/recipe/new")
     public String newRecipe(Model model){
         RecipeCommand recipeCommand = new RecipeCommand();
-        model.addAttribute("recipe",recipeCommand);
+        model.addAttribute(RECIPE,recipeCommand);
         return "recipe/recipeform";
     }
     @GetMapping("/recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
         Long recipeId = Long.parseLong(id);
         RecipeCommand recipeCommand = recipeService.getRecipeCommand(recipeId);
-        model.addAttribute("recipe", recipeCommand);
+        model.addAttribute(RECIPE, recipeCommand);
         return "recipe/recipeform";
     }
 
