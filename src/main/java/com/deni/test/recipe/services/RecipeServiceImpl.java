@@ -51,6 +51,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     public RecipeCommand getRecipeCommand(Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
+        log.debug("RecipeServiceImpl Is image present" + " " + recipe.get().getImage());
         if(!recipe.isPresent())
             throw new RuntimeException("No recipes present");
         return recipeToRecipeCommand.convert(recipe.get());
@@ -68,5 +69,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     public void deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveRecipe(Recipe recipe) {
+        recipeRepository.save(recipe);
     }
 }

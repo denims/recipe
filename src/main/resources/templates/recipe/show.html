@@ -26,6 +26,9 @@
             <br>
             Difficulty : <span th:text="${recipe.difficulty}">cook time</span>
         </p>
+        <a th:href="image">
+            <img src="../../images/guacamole-foto-heroe.jpg" th:src= "@{'/recipe/' + ${recipe.id} + '/recipeimage'}" class="img-thumbnail" alt="Responsive image">
+        </a>
         <h4>Ingredients(<a href="ingredients/">Edit</a>)</h4>
         <ul>
             <li th:each="ingredient1:${recipe.ingredients}" th:text="${ingredient1.description}">Ingredient</li>
