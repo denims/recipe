@@ -3,7 +3,7 @@ package com.deni.test.recipe.controllers;
 import com.deni.test.recipe.commands.RecipeCommand;
 import com.deni.test.recipe.model.Recipe;
 import com.deni.test.recipe.services.RecipeService;
-import exceptions.RecipeNotFound;
+import com.deni.test.recipe.exceptions.RecipeNotFound;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
@@ -44,13 +44,13 @@ public class RecipeControllerTest {
 
     @Test
     public void testIfGetRecipeIsCalledOnlyOnce() {
-        recipeController.getRecipe(model, ArgumentMatchers.anyLong());
+        recipeController.getRecipe(model, "1");
         Mockito.verify(recipeService, Mockito.times(1)).getRecipe(ArgumentMatchers.anyLong());
     }
 
     @Test
     public void testIfRecipeShowIsReturned() {
-        assertEquals("recipe/show", recipeController.getRecipe(model, ArgumentMatchers.anyLong()));
+        assertEquals("recipe/show", recipeController.getRecipe(model, "1"));
     }
 
     @Test
@@ -104,5 +104,12 @@ public class RecipeControllerTest {
 
         mockMvc.perform(get("/recipe/1/show")).andExpect(view().name("404error"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void givenBadRecipeIdShouldSendBadRequestStatusAndErrorPage() throws Exception {
+
+        mockMvc.perform(get("/recipe/asdf/show")).andExpect(view().name("400error"))
+                .andExpect(status().isBadRequest());
     }
 }

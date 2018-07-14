@@ -1,4 +1,4 @@
-package exceptions;
+package com.deni.test.recipe.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

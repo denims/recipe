@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Recipe Not Found</title>
 </head>
 <body>
     <h1>404 error</h1>
-    <h3>The recipe is not found in database</h3>
+    <h3 th:text="${exception.getMessage()}">The recipe is not found in database</h3>
 </body>
 </html>

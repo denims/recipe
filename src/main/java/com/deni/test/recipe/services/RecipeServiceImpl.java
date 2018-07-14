@@ -5,7 +5,7 @@ import com.deni.test.recipe.converters.RecipeCommandToRecipe;
 import com.deni.test.recipe.converters.RecipeToRecipeCommand;
 import com.deni.test.recipe.model.Recipe;
 import com.deni.test.recipe.repositories.RecipeRepository;
-import exceptions.RecipeNotFound;
+import com.deni.test.recipe.exceptions.RecipeNotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
