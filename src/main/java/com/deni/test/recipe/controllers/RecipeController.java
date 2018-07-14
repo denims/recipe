@@ -2,9 +2,12 @@ package com.deni.test.recipe.controllers;
 
 import com.deni.test.recipe.commands.RecipeCommand;
 import com.deni.test.recipe.services.RecipeService;
+import exceptions.RecipeNotFound;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RecipeController {
@@ -47,5 +50,13 @@ public class RecipeController {
         recipeService.deleteRecipe(idToDelete);
 
         return "redirect:/";
+    }
+
+    @ExceptionHandler(RecipeNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView recipeNotFound(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        return modelAndView;
     }
 }
