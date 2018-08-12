@@ -2,9 +2,12 @@ package com.deni.test.recipe.controllers;
 
 import com.deni.test.recipe.commands.RecipeCommand;
 import com.deni.test.recipe.services.RecipeService;
+import com.deni.test.recipe.exceptions.RecipeNotFound;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RecipeController {
@@ -17,8 +20,9 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/{id}/show")
-    public String getRecipe(Model model, @PathVariable Long id){
-        model.addAttribute(RECIPE,recipeService.getRecipe(id));
+    public String getRecipe(Model model, @PathVariable String id){
+        long recipeId = Long.parseLong(id);
+        model.addAttribute(RECIPE,recipeService.getRecipe(recipeId));
         return "recipe/show";
     }
     @GetMapping("/recipe/new")
@@ -48,4 +52,14 @@ public class RecipeController {
 
         return "redirect:/";
     }
+
+    @ExceptionHandler(RecipeNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView recipeNotFound(Exception exception){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
+        return modelAndView;
+    }
+
 }

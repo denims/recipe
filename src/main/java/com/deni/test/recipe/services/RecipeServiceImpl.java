@@ -5,6 +5,7 @@ import com.deni.test.recipe.converters.RecipeCommandToRecipe;
 import com.deni.test.recipe.converters.RecipeToRecipeCommand;
 import com.deni.test.recipe.model.Recipe;
 import com.deni.test.recipe.repositories.RecipeRepository;
+import com.deni.test.recipe.exceptions.RecipeNotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe getRecipe(Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
         if(!recipe.isPresent())
-            throw new RuntimeException("No recipes present");
+            throw new RecipeNotFound("No recipes present");
         return recipe.get();
     }
 
@@ -53,7 +54,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipe = recipeRepository.findById(id);
         log.debug("RecipeServiceImpl Is image present" + " " + recipe.get().getImage());
         if(!recipe.isPresent())
-            throw new RuntimeException("No recipes present");
+            throw new RecipeNotFound("No recipes present");
         return recipeToRecipeCommand.convert(recipe.get());
     }
 
