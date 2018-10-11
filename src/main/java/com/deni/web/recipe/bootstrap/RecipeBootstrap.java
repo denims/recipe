@@ -5,6 +5,7 @@ import com.deni.web.recipe.repositories.RecipeRepository;
 import com.deni.web.recipe.repositories.UnitOfMeasureRepository;
 import com.deni.web.recipe.model.*;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Profile("default")
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RecipeBootstrap.class);
